@@ -1,11 +1,31 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionBarTheme">@style/AppTheme.AppBarOverlay</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+    </style>
+
+    <!--<style name="ThemeOverlay.AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">-->
+        <!--<item name="android:textColorPrimary">@color/colorAccent</item>-->
+        <!--<item name="android:background">@color/colorPrimary</item>-->
+    <!--</style>-->
+
+    <!--<style name="ThemeOverlay.AppTheme.PopupMenu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">-->
+        <!--<item name="android:background">@color/colorPrimary</item>-->
+        <!--<item name="android:textColorPrimary">@color/colorPrimaryDark</item>-->
+    <!--</style>-->
+
+    <!--<style name="ActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">-->
+        <!--<item name="android:textColor">@color/colorAccent</item>-->
+        <!--<item name="android:textSize">12sp</item>-->
+    <!--</style>-->
 
 </resources>
