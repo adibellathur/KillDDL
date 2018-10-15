@@ -1,18 +1,22 @@
 package com.team27.killddl;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActionBar toolbar;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = getSupportActionBar();
         toolbar.setElevation(0);
-
         toolbar.setTitle("Calendar");
         loadFragment(new CalendarFragment());
+
+        fab = (FloatingActionButton) findViewById(R.id.fab_add);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,6 +54,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+//                Intent intent = new Intent(this, SecondActivity.class);
+//                startActivity(intent);
+                showToast("FAB pressed");
+            }
+        });
+
     }
 
     private void loadFragment(Fragment fragment) {

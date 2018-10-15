@@ -12,21 +12,12 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorPrimary">@color/colorAccent</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:actionBarSize">80dp</item>
+        <item name="titleTextStyle">@style/AppTheme.ActionBar.TitleText</item>
     </style>
 
-    <!--<style name="ThemeOverlay.AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">-->
-        <!--<item name="android:textColorPrimary">@color/colorAccent</item>-->
-        <!--<item name="android:background">@color/colorPrimary</item>-->
-    <!--</style>-->
-
-    <!--<style name="ThemeOverlay.AppTheme.PopupMenu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">-->
-        <!--<item name="android:background">@color/colorPrimary</item>-->
-        <!--<item name="android:textColorPrimary">@color/colorPrimaryDark</item>-->
-    <!--</style>-->
-
-    <!--<style name="ActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">-->
-        <!--<item name="android:textColor">@color/colorAccent</item>-->
-        <!--<item name="android:textSize">12sp</item>-->
-    <!--</style>-->
+    <style name="AppTheme.ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">80sp</item>
+    </style>
 
 </resources>
