@@ -3,19 +3,20 @@ package com.team27.killddl;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.team27.killddl.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotificationsFragment extends Fragment {
+public class  SettingsFragment extends Fragment {
 
+    private View view;
 
-    public NotificationsFragment() {
+    public SettingsFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +25,8 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifications, container, false);
+        view = inflater.inflate(R.layout.fragment_settings, container, false);
+        return view;
     }
 
 }

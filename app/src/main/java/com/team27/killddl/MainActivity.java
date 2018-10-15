@@ -1,20 +1,14 @@
 package com.team27.killddl;
 
-import android.app.Service;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import layout.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +20,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = getSupportActionBar();
+        toolbar.setElevation(0);
 
         toolbar.setTitle("Calendar");
+        loadFragment(new CalendarFragment());
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFragment(Fragment fragment) {
-        android.app.FragmentManager manager = getFragmentManager();
+        FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.contentLayout, fragment,
                 fragment.getTag()).commit();
     }
