@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.team27.killddl.CreateTaskActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Name"
+            android:textAppearance="@android:style/TextAppearance.Material.Title" />
+
+        <EditText
+            android:id="@+id/fieldName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="What needs to be done?" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Description"
+            android:textAppearance="@android:style/TextAppearance.Material.Title" />
+
+        <EditText
+            android:id="@+id/fieldDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="More information"
+            android:inputType="textMultiLine" />
+
+        <TextView
+            android:id="@+id/dateLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Due Date"
+            android:textAppearance="@android:style/TextAppearance.Material.Title" />
+
+        <DatePicker
+            android:id="@+id/fieldDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Set Color"
+            android:textAppearance="@android:style/TextAppearance.Material.Title" />
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fieldColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/color_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/blue"
+                android:onClick="onRadioButtonClicked"
+                android:text="Blue" />
+
+            <RadioButton
+                android:id="@+id/color_green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/green"
+                android:onClick="onRadioButtonClicked"
+                android:text="Green" />
+
+            <RadioButton
+                android:id="@+id/color_yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/yellow"
+                android:onClick="onRadioButtonClicked"
+                android:text="Yellow" />
+
+            <RadioButton
+                android:id="@+id/color_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/orange"
+                android:onClick="onRadioButtonClicked"
+                android:text="Orange" />
+
+            <RadioButton
+                android:id="@+id/color_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/red"
+                android:onClick="onRadioButtonClicked"
+                android:text="Red" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:text="Save Task" />
+
+
+    </LinearLayout>
+
+</ScrollView>
