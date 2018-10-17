@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-//                Intent intent = new Intent(this, SecondActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(view.getContext(), NewTaskActivity.class);
+                startActivity(intent);
                 showToast("FAB pressed");
             }
         });
