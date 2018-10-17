@@ -38,7 +38,7 @@
             android:id="@+id/fieldDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="More information"
+            android:hint="Additional information"
             android:inputType="textMultiLine" />
 
         <TextView
@@ -75,7 +75,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/blue"
-                android:onClick="onRadioButtonClicked"
                 android:text="Blue" />
 
             <RadioButton
@@ -83,7 +82,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/green"
-                android:onClick="onRadioButtonClicked"
                 android:text="Green" />
 
             <RadioButton
@@ -91,7 +89,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/yellow"
-                android:onClick="onRadioButtonClicked"
                 android:text="Yellow" />
 
             <RadioButton
@@ -99,7 +96,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/orange"
-                android:onClick="onRadioButtonClicked"
                 android:text="Orange" />
 
             <RadioButton
@@ -107,7 +103,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/red"
-                android:onClick="onRadioButtonClicked"
                 android:text="Red" />
 
         </RadioGroup>
