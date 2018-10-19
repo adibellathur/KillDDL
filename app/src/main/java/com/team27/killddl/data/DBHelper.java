@@ -5,32 +5,31 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.team27.killddl.R;
+
 /**
  * Created by adithya on 10/18/18.
  */
 
-import com.delaroystudios.taskmakerapp.R;
-import com.delaroystudios.taskmakerapp.data.TaskContract.TaskColumns;
 
+public class DBHelper extends SQLiteOpenHelper {
 
-public class DbHelper extends SQLiteOpenHelper {
-
-    private static final String DATABASE_NAME = "tasks.db";
+    private static final String DATABASE_NAME = "KillDDLTasks.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String SQL_CREATE_TABLE_TASKS = String.format("CREATE TABLE %s"
                     +" (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s INTEGER, %s INTEGER, %s INTEGER)",
             TaskContract.TABLE_TASKS,
-            TaskColumns._ID,
-            TaskColumns.DESCRIPTION,
-            TaskColumns.IS_COMPLETE,
-            TaskColumns.IS_PRIORITY,
-            TaskColumns.DUE_DATE
+            TaskContract.TaskColumns._ID,
+            TaskContract.TaskColumns.DESCRIPTION,
+            TaskContract.TaskColumns.IS_COMPLETE,
+            TaskContract.TaskColumns.PRIORITY,
+            TaskContract.TaskColumns.DUE_DATE
     );
 
     private final Context mContext;
 
-    public DbHelper(Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mContext = context;
     }
@@ -49,10 +48,10 @@ public class DbHelper extends SQLiteOpenHelper {
 
     private void loadDemoTask(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
-        values.put(TaskColumns.DESCRIPTION, mContext.getResources().getString(R.string.demo_task));
-        values.put(TaskColumns.IS_COMPLETE, 0);
-        values.put(TaskColumns.IS_PRIORITY, 1);
-        values.put(TaskColumns.DUE_DATE, Long.MAX_VALUE);
+        values.put(TaskContract.TaskColumns.DESCRIPTION, mContext.getResources().getString(R.string.title_activity_create_task));
+        values.put(TaskContract.TaskColumns.IS_COMPLETE, 0);
+        values.put(TaskContract.TaskColumns.PRIORITY, 1);
+        values.put(TaskContract.TaskColumns.DUE_DATE, Long.MAX_VALUE);
 
         db.insertOrThrow(TaskContract.TABLE_TASKS, null, values);
     }
