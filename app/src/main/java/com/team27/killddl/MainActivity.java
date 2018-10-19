@@ -11,12 +11,21 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.team27.killddl.data.DBHelper;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActionBar toolbar;
     private FloatingActionButton fab;
+    private DBHelper helper;
+    FragmentManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setElevation(0);
         toolbar.setTitle("Calendar");
         loadFragment(new CalendarFragment());
+
+        helper = new DBHelper(this);
 
         fab = (FloatingActionButton) findViewById(R.id.fab_add);
 
@@ -66,15 +77,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFragment(Fragment fragment) {
-        FragmentManager manager = getSupportFragmentManager();
+        manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.contentLayout, fragment,
                 fragment.getTag()).commit();
     }
+
 
     private void showToast(String content) {
         Toast toast;
         toast = Toast.makeText(MainActivity.this, content, Toast.LENGTH_SHORT);
         toast.setMargin(0, (float)0.07);
         toast.show();
+    }
+
+    public void deleteTask(View view){
+        View parent = (View)view.getParent();
+        TextView taskTextView = (TextView)parent.findViewById(R.id.list_taskName);
+        String task = String.valueOf(taskTextView.getText());
+        helper.deleteTask(task);
+
     }
 }

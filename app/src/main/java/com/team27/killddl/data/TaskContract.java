@@ -10,7 +10,7 @@ public class TaskContract {
     public static final String TABLE_TASKS = "tasks";
 
     //Unique authority string for the content provider
-    public static final String CONTENT_AUTHORITY = "com.delaroystudios.taskmakerapp";
+    public static final String CONTENT_AUTHORITY = "com.team27.killddl";
 
     /* Sort order constants */
     //Priority first, Completed last, the rest by date
@@ -43,6 +43,8 @@ public class TaskContract {
 
 
     public static final class TaskColumns implements BaseColumns {
+
+        public static final String NAME = "name";
 
         public static final String DESCRIPTION = "description";
 
