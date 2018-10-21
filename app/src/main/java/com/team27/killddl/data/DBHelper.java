@@ -73,21 +73,25 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<String> getTaskList(){
-        ArrayList<String> taskList = new ArrayList<>();
+    public ArrayList<Task> getTaskList(){
+        ArrayList<Task> taskList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(DB_TABLE,new String[]{NAME},null,null,null,null,null);
+        Cursor cursor = db.query(DB_TABLE,new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
+                null,null,null,null,TaskContract.DATE_SORT);
         while(cursor.moveToNext()){
-            int index = cursor.getColumnIndex(NAME);
-            taskList.add(cursor.getString(index));
+            int nameIndex = cursor.getColumnIndex(NAME);
+            int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
+            int priorityIndex = cursor.getColumnIndex(PRIORITY);
+            int dateIndex = cursor.getColumnIndex(DUE_DATE);
+            taskList.add(
+                    new Task(cursor.getString(nameIndex),
+                            cursor.getString(descriptionIndex),
+                            cursor.getInt(priorityIndex),
+                            cursor.getInt(dateIndex))
+            );
         }
         cursor.close();
         db.close();
-
-        Log.d("DEBUG", "gathered the task:");
-        for(String task : taskList) {
-            Log.d("DEBUG", task);
-        }
         return taskList;
     }
 }

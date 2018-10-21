@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.team27.killddl.R;
 import com.team27.killddl.data.DBHelper;
+import com.team27.killddl.data.Task;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,12 @@ public class DayCalendarFragment extends Fragment {
     }
 
     private void loadTaskList() {
-        ArrayList<String> tasks = helper.getTaskList();
+        ArrayList<Task> tasksComplete = helper.getTaskList();
+        ArrayList<String> tasks = new ArrayList<>();
+        for(Task t : tasksComplete) {
+            tasks.add(t.getName());
+        }
+
         if(mAdapter==null){
             mAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.row,R.id.list_taskName,tasks);
             taskList.setAdapter(mAdapter);
