@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +18,11 @@ import com.facebook.login.widget.LoginButton;
 
 import java.util.Arrays;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private static final String EMAIL = "email";
 
-    //Login
+    //LoginActivity
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private TextView skipText;
@@ -51,7 +50,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        //Facebook Login
+        //Facebook LoginActivity
         FacebookSdk.sdkInitialize(FacebookSdk.getApplicationContext());
 
         loginButton = findViewById(R.id.login_button);
@@ -78,7 +77,7 @@ public class Login extends AppCompatActivity {
 
     private void showToast(String content) {
         Toast toast;
-        toast = Toast.makeText(Login.this, content, Toast.LENGTH_LONG);
+        toast = Toast.makeText(LoginActivity.this, content, Toast.LENGTH_LONG);
         toast.setMargin(0, (float)0.07);
         toast.show();
     }
@@ -90,7 +89,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void login(String user){
-        Intent intent = new Intent(Login.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //        intent.putExtra("userID", user);
         startActivity(intent);
     }

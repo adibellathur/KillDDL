@@ -24,6 +24,9 @@ public class CalendarFragment extends Fragment {
     private ViewPager viewPager;
     private ViewPageAdapter adapter;
 
+    DayCalendarFragment dayCalendarFragment;
+    MonthCalendarFragment monthCalendarFragment;
+
     public CalendarFragment() {
         // Required empty public constructor
     }
@@ -37,12 +40,21 @@ public class CalendarFragment extends Fragment {
         tabLayout = (TabLayout) view.findViewById(R.id.calendar_tab_layout);
         viewPager = (ViewPager) view.findViewById(R.id.calendar_viewpager);
         adapter = new ViewPageAdapter(getChildFragmentManager());
-        adapter.AddFragment(new DayCalendarFragment(), "Day");
-        adapter.AddFragment(new MonthCalendarFragment(), "Month");
+
+        dayCalendarFragment = new DayCalendarFragment();
+        monthCalendarFragment = new MonthCalendarFragment();
+
+        adapter.AddFragment(dayCalendarFragment, "Today");
+        adapter.AddFragment(monthCalendarFragment, "Month");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
         return view;
+    }
+
+    public void refreshTaskLists() {
+        dayCalendarFragment.refreshList();
+        monthCalendarFragment.refreshList();
     }
 }
