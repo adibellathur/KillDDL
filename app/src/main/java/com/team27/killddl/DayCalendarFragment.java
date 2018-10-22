@@ -54,7 +54,7 @@ public class DayCalendarFragment extends Fragment {
         taskList = (ListView) view.findViewById(R.id.taskList);
         btnDate = (Button) view.findViewById(R.id.btnDate);
         today = Calendar.getInstance();
-        String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH + 1), today.get(Calendar.DAY_OF_MONTH));
+        String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
 
         loadTaskList(date);
         setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
@@ -88,8 +88,8 @@ public class DayCalendarFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH + 1), today.get(Calendar.DAY_OF_MONTH));
-        loadTaskList(date);
+        //String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH + 1), today.get(Calendar.DAY_OF_MONTH));
+        //loadTaskList(date);
     }
 
     private void loadTaskList(String date) {
