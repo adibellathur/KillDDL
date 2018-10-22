@@ -3,6 +3,7 @@ package com.team27.killddl;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,7 +33,6 @@ public class DayCalendarFragment extends Fragment {
     ArrayAdapter<String> mAdapter;
     Calendar today;
     Button btnDate;
-    Dialog dialog;
     private int mYear, mMonth, mDay;
 
     static final int DATE_DIALOG_ID = 0;
@@ -56,6 +56,7 @@ public class DayCalendarFragment extends Fragment {
 
         loadTaskList(date);
         setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
+        refreshList();
 
         return view;
     }
@@ -63,12 +64,16 @@ public class DayCalendarFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        refreshList();
+    }
+
+    public void refreshList() {
         today = Calendar.getInstance();
         String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
-
         loadTaskList(date);
         setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
     }
+
 
     private void loadTaskList(String date) {
         ArrayList<Task> tasksComplete = helper.getTaskListByDate(date);
