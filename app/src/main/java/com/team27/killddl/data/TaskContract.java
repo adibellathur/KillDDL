@@ -18,7 +18,7 @@ public class TaskContract {
             TaskColumns.IS_COMPLETE, TaskColumns.PRIORITY, TaskColumns.DUE_DATE);
 
     //Completed last, then by date, followed by priority
-    public static final String DATE_SORT = String.format("%s ASC, %s ASC, %s DESC",
+    public static final String DATE_SORT = String.format("%s ASC, date(%s) ASC, %s DESC",
             TaskColumns.IS_COMPLETE, TaskColumns.DUE_DATE, TaskColumns.PRIORITY);
 
     //Base content Uri for accessing the provider

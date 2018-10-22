@@ -5,9 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by adithya on 10/18/18.
@@ -26,7 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DUE_DATE = "due_date";
 
     private static final String SQL_CREATE_TABLE_TASKS = String.format("CREATE TABLE %s"
-                    +" (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s TEXT, %s INTEGER, %s INTEGER, %s INTEGER)",
+                    +" (%s INTEGER PRIMARY KEY AUTOINCREMENT, %s TEXT, %s TEXT, %s INTEGER, %s INTEGER, %s TEXT)",
             DB_TABLE,
             TaskContract.TaskColumns._ID,
             TaskContract.TaskColumns.NAME,
@@ -55,7 +56,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void insertNewTask(String name, String description, int priority, int date){
+    public void insertNewTask(String name, String description, int priority, String date){
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NAME,name);
@@ -73,12 +74,12 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<Task> getTaskList(){
+    public ArrayList<Task> getTaskList() {
         ArrayList<Task> taskList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(DB_TABLE,new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
-                null,null,null,null,TaskContract.DATE_SORT);
-        while(cursor.moveToNext()){
+        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
+                null, null, null, null, TaskContract.DATE_SORT);
+        while (cursor.moveToNext()) {
             int nameIndex = cursor.getColumnIndex(NAME);
             int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
             int priorityIndex = cursor.getColumnIndex(PRIORITY);
@@ -87,11 +88,42 @@ public class DBHelper extends SQLiteOpenHelper {
                     new Task(cursor.getString(nameIndex),
                             cursor.getString(descriptionIndex),
                             cursor.getInt(priorityIndex),
-                            cursor.getInt(dateIndex))
+                            cursor.getString(dateIndex))
             );
         }
         cursor.close();
         db.close();
         return taskList;
+    }
+
+    public ArrayList<Task> getTaskListByDate(String date) {
+        String where = "due_date=date('"+date+"')";
+        ArrayList<Task> taskList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
+                where, null, null, null, TaskContract.DATE_SORT);
+        while (cursor.moveToNext()) {
+            int nameIndex = cursor.getColumnIndex(NAME);
+            int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
+            int priorityIndex = cursor.getColumnIndex(PRIORITY);
+            int dateIndex = cursor.getColumnIndex(DUE_DATE);
+            taskList.add(
+                    new Task(cursor.getString(nameIndex),
+                            cursor.getString(descriptionIndex),
+                            cursor.getInt(priorityIndex),
+                            cursor.getString(dateIndex))
+            );
+        }
+        cursor.close();
+        db.close();
+        return taskList;
+    }
+
+    public static String getDateString(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = sdf.format(calendar.getTime());
+        return formattedDate;
     }
 }

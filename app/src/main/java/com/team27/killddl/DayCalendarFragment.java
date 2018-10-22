@@ -32,7 +32,7 @@ public class DayCalendarFragment extends Fragment {
     ListView taskList;
     DBHelper helper;
     ArrayAdapter<String> mAdapter;
-    Calendar c;
+    Calendar today;
     Button btnDate;
     Dialog dialog;
     private int mYear, mMonth, mDay;
@@ -53,17 +53,19 @@ public class DayCalendarFragment extends Fragment {
         dateDisplay = (TextView) view.findViewById(R.id.dateDisplay);
         taskList = (ListView) view.findViewById(R.id.taskList);
         btnDate = (Button) view.findViewById(R.id.btnDate);
-        c = Calendar.getInstance();
-        loadTaskList();
-        setDate(c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
+        today = Calendar.getInstance();
+        String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH + 1), today.get(Calendar.DAY_OF_MONTH));
+
+        loadTaskList(date);
+        setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
 
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Process to get Current Date
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
+                mYear = today.get(Calendar.YEAR);
+                mMonth = today.get(Calendar.MONTH);
+                mDay = today.get(Calendar.DAY_OF_MONTH);
 
                 // Launch Date Picker Dialog
                 DatePickerDialog dpd = new DatePickerDialog(context,
@@ -72,10 +74,8 @@ public class DayCalendarFragment extends Fragment {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 setDate(monthOfYear, dayOfMonth, year);
-
-                                /*
-                                    Load tasks for specific day?
-                                 */
+                                String date = DBHelper.getDateString(year, monthOfYear, dayOfMonth);
+                                loadTaskList(date);
                             }
                         }, mYear, mMonth, mDay);
                 dpd.show();
@@ -88,11 +88,12 @@ public class DayCalendarFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        loadTaskList();
+        String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH + 1), today.get(Calendar.DAY_OF_MONTH));
+        loadTaskList(date);
     }
 
-    private void loadTaskList() {
-        ArrayList<Task> tasksComplete = helper.getTaskList();
+    private void loadTaskList(String date) {
+        ArrayList<Task> tasksComplete = helper.getTaskListByDate(date);
         ArrayList<String> tasks = new ArrayList<>();
         for(Task t : tasksComplete) {
             tasks.add(t.getName());

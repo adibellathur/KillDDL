@@ -1,8 +1,6 @@
 package com.team27.killddl;
 
-import android.content.ContentValues;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,10 +12,6 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.team27.killddl.data.DBHelper;
-import com.team27.killddl.data.TaskContract;
-
-import java.sql.Time;
-import java.util.Timer;
 
 public class CreateTaskActivity extends AppCompatActivity {
 
@@ -51,19 +45,25 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 // Debugging
-                // view.offsetTopAndBottom(-50);
-                showToast("priority:" + getPriority());
+                //showToast("Priority:" + getPriority());
+
+                int day  = taskDueDate.getDayOfMonth();
+                int month= taskDueDate.getMonth();
+                int year = taskDueDate.getYear();
+                String dateString = DBHelper.getDateString(year, month, day);
+
+                showToast("Date:" + dateString);
 
                 SaveTask(taskName.getText().toString(),
                         taskDescription.getText().toString(),
                         getPriority(),
-                        0);
+                        dateString);
             }
         });
 
     }
 
-    private void SaveTask(String name, String description, int priority, int date) {
+    private void SaveTask(String name, String description, int priority, String date) {
         helper.insertNewTask(name, description, priority, date);
         finish();
     }

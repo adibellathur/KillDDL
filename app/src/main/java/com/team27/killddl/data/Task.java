@@ -9,9 +9,9 @@ public class Task {
     private String name;
     private String description;
     private int priority;
-    private int date;
+    private String date;
 
-    public Task(String name, String description, int priority, int date) {
+    public Task(String name, String description, int priority, String date) {
         setName(name);
         setDescription(description);
         setPriority(priority);
@@ -42,11 +42,9 @@ public class Task {
         this.priority = priority;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
-        this.date = date;
-    }
+    public void setDate(String date) { this.date = date; }
 }

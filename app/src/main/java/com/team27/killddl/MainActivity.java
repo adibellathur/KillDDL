@@ -11,14 +11,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team27.killddl.data.DBHelper;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -95,6 +91,5 @@ public class MainActivity extends AppCompatActivity {
         TextView taskTextView = (TextView)parent.findViewById(R.id.list_taskName);
         String task = String.valueOf(taskTextView.getText());
         helper.deleteTask(task);
-
     }
 }
