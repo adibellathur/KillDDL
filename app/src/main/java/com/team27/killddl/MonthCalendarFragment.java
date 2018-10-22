@@ -67,6 +67,11 @@ public class MonthCalendarFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     private void loadTaskList(String date) {
         ArrayList<Task> tasksComplete = helper.getTaskListByDate(date);
         ArrayList<String> tasks = new ArrayList<>();
@@ -77,6 +82,7 @@ public class MonthCalendarFragment extends Fragment {
         if(mAdapter==null){
             mAdapter = new ArrayAdapter<>(view.getContext(),R.layout.row,R.id.list_taskName,tasks);
             monthTaskList.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
         }
         else{
             mAdapter.clear();

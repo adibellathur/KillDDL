@@ -57,40 +57,17 @@ public class DayCalendarFragment extends Fragment {
         loadTaskList(date);
         setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
 
-        /*
-        //
-        btnDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Process to get Current Date
-                mYear = today.get(Calendar.YEAR);
-                mMonth = today.get(Calendar.MONTH);
-                mDay = today.get(Calendar.DAY_OF_MONTH);
-
-                // Launch Date Picker Dialog
-                DatePickerDialog dpd = new DatePickerDialog(context,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                setDate(monthOfYear, dayOfMonth, year);
-                                String date = DBHelper.getDateString(year, monthOfYear, dayOfMonth);
-                                loadTaskList(date);
-                            }
-                        }, mYear, mMonth, mDay);
-                dpd.show();
-            }
-        });
-        */
-
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH + 1), today.get(Calendar.DAY_OF_MONTH));
-        //loadTaskList(date);
+        today = Calendar.getInstance();
+        String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
+
+        loadTaskList(date);
+        setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
     }
 
     private void loadTaskList(String date) {
@@ -103,6 +80,7 @@ public class DayCalendarFragment extends Fragment {
         if(mAdapter==null){
             mAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.row,R.id.list_taskName,tasks);
             taskList.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
         }
         else{
             mAdapter.clear();

@@ -76,4 +76,10 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
+    <!-- Facebook attribute -->
+    <!--<string name="facebook_app_id">330747564357910</string>-->
+    <string name="facebook_app_id">330889707686772</string>
+    <string name="fb_login_protocol_scheme">fb330889707686772</string>
+
 </resources>
