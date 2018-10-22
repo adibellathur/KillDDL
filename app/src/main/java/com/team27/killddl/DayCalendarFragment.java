@@ -1,20 +1,25 @@
 package com.team27.killddl;
 
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.team27.killddl.R;
 import com.team27.killddl.data.DBHelper;
 import com.team27.killddl.data.Task;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,9 +27,17 @@ import java.util.ArrayList;
 public class DayCalendarFragment extends Fragment {
 
     View view;
+    Context context;
+    TextView dateDisplay;
     ListView taskList;
     DBHelper helper;
     ArrayAdapter<String> mAdapter;
+    Calendar c;
+    Button btnDate;
+    Dialog dialog;
+    private int mYear, mMonth, mDay;
+
+    static final int DATE_DIALOG_ID = 0;
 
     public DayCalendarFragment() {
         // Required empty public constructor
@@ -35,10 +48,40 @@ public class DayCalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_day_calendar, container, false);
-
+        context = container.getContext();
         helper = new DBHelper(view.getContext());
+        dateDisplay = (TextView) view.findViewById(R.id.dateDisplay);
         taskList = (ListView) view.findViewById(R.id.taskList);
+        btnDate = (Button) view.findViewById(R.id.btnDate);
+        c = Calendar.getInstance();
         loadTaskList();
+        setDate(c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.YEAR));
+
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Process to get Current Date
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                // Launch Date Picker Dialog
+                DatePickerDialog dpd = new DatePickerDialog(context,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                setDate(monthOfYear, dayOfMonth, year);
+
+                                /*
+                                    Load tasks for specific day?
+                                 */
+                            }
+                        }, mYear, mMonth, mDay);
+                dpd.show();
+            }
+        });
+
         return view;
     }
 
@@ -65,5 +108,11 @@ public class DayCalendarFragment extends Fragment {
             mAdapter.notifyDataSetChanged();
         }
     }
+
+    private void setDate(int monthOfYear, int dayOfMonth, int year) {
+        dateDisplay.setText((monthOfYear + 1) + "/"
+                + dayOfMonth + "/" + year);
+    }
+
 
 }
