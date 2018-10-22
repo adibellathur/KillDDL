@@ -1,7 +1,6 @@
 package com.team27.killddl;
 
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -59,6 +57,8 @@ public class DayCalendarFragment extends Fragment {
         loadTaskList(date);
         setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
 
+        /*
+        //
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +81,7 @@ public class DayCalendarFragment extends Fragment {
                 dpd.show();
             }
         });
+        */
 
         return view;
     }
@@ -111,8 +112,8 @@ public class DayCalendarFragment extends Fragment {
     }
 
     private void setDate(int monthOfYear, int dayOfMonth, int year) {
-        dateDisplay.setText((monthOfYear + 1) + "/"
-                + dayOfMonth + "/" + year);
+        dateDisplay.setText("Tasks Today: (" + (monthOfYear + 1) + "/"
+                + dayOfMonth + "/" + year + ")");
     }
 
 
