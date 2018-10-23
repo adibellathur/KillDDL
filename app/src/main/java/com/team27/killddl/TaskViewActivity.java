@@ -34,7 +34,7 @@ public class TaskViewActivity extends AppCompatActivity {
     private TextView taskDate;
     private TextView taskPriority;
     private Button deleteButton;
-
+    public String tname;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class TaskViewActivity extends AppCompatActivity {
         Task t = helper.getTask(name);
         String date = t.getDate();
         showToast(date);
-        String tname = t.getName();
+        tname = t.getName();
         String description = t.getDescription();
         showToast(description);
         int priority = t.getPriority();
@@ -92,6 +92,15 @@ public class TaskViewActivity extends AppCompatActivity {
         showToast("deleting " + task);
         helper.deleteTask(task);
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void editTask(View view){
+
+
+        Intent intent = new Intent(this, EditTaskActivity.class);
+        intent.putExtra("NAME", tname);
+        showToast(tname);
         startActivity(intent);
     }
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -46,6 +47,7 @@ public class  SettingsFragment extends Fragment {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent i = new Intent(view.getContext(),LoginActivity.class);
+                AccessToken.setCurrentAccessToken(null);
                 startActivity(i);
             }
         });
