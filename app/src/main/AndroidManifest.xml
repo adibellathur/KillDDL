@@ -20,6 +20,9 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".TaskViewActivity">
+
+        </activity>
         <activity android:name=".CreateTaskActivity" />
         <activity
             android:name="com.facebook.FacebookActivity"
@@ -56,9 +59,7 @@
                 <action android:name="com.team27.killddl.action.DISPLAY_NOTIFICATION"/>
             </intent-filter>
         </receiver>
-        <activity android:name=".TaskViewActivity">
 
-        </activity>
     </application>
 
 </manifest>

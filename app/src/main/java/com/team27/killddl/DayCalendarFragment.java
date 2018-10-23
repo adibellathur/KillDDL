@@ -2,6 +2,7 @@ package com.team27.killddl;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -59,15 +60,9 @@ public class DayCalendarFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String value = (String)parent.getItemAtPosition(position);
-                /*Toast.makeText(getActivity().getApplicationContext(),
-                        "Name: " + value, Toast.LENGTH_LONG)
-                        .show();*/
 
                 Intent intent = new Intent(view.getContext(), TaskViewActivity.class);
                 intent.putExtra("NAME", value);
-               /* Toast.makeText(getActivity().getApplicationContext(),
-                        "created intent", Toast.LENGTH_LONG)
-                        .show();*/
                 startActivity(intent);
             }
         });
