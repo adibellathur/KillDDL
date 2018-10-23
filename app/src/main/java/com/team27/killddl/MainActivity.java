@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -28,15 +29,23 @@ public class MainActivity extends AppCompatActivity {
     private DBHelper helper;
     FragmentManager manager;
 
+    public CalendarFragment calendarFragment;
+    public NotificationsFragment notificationsFragment;
+    public SettingsFragment settingsFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        calendarFragment = new CalendarFragment();
+        notificationsFragment = new NotificationsFragment();
+        settingsFragment = new SettingsFragment();
+
         toolbar = getSupportActionBar();
         toolbar.setElevation(0);
         toolbar.setTitle("Calendar");
-        loadFragment(new CalendarFragment());
+        loadFragment(calendarFragment);
 
         helper = new DBHelper(this);
 
@@ -49,17 +58,18 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_calendar:
                         toolbar.setTitle("Calendar");
-                        loadFragment(new CalendarFragment());
+                        calendarFragment.refreshTaskLists();
+                        loadFragment(calendarFragment);
                         showToast("Calendar pressed");
                         break;
                     case R.id.action_notification:
                         toolbar.setTitle("Notifications");
-                        loadFragment(new NotificationsFragment());
+                        loadFragment(notificationsFragment);
                         showToast("Notifications pressed");
                         break;
                     case R.id.action_settings:
                         toolbar.setTitle("Settings");
-                        loadFragment(new SettingsFragment());
+                        loadFragment(settingsFragment);
                         showToast("Settings pressed");
                         break;
                 }
@@ -101,8 +111,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void deleteTask(View view){
         View parent = (View)view.getParent();
-        TextView taskTextView = (TextView)parent.findViewById(R.id.list_taskName);
+        TextView taskTextView = (TextView) parent.findViewById(R.id.list_taskName);
         String task = String.valueOf(taskTextView.getText());
         helper.deleteTask(task);
+        calendarFragment.refreshTaskLists();
     }
 }

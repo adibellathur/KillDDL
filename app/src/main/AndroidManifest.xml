@@ -37,13 +37,16 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login">
+
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".NotificationActivity"
             android:label="@string/title_activity_notification"
@@ -53,6 +56,9 @@
                 <action android:name="com.team27.killddl.action.DISPLAY_NOTIFICATION"/>
             </intent-filter>
         </receiver>
+        <activity android:name=".TaskViewActivity">
+
+        </activity>
     </application>
 
 </manifest>

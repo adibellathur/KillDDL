@@ -28,6 +28,7 @@ public class MonthCalendarFragment extends Fragment {
     Context context;
     DBHelper helper;
     TextView monthDateDisplay;
+    Calendar today;
 
     ArrayAdapter<String> mAdapter;
     ListView monthTaskList;
@@ -48,7 +49,7 @@ public class MonthCalendarFragment extends Fragment {
         monthDateDisplay = view.findViewById(R.id.monthDateDisplay);
 
 
-        Calendar today = Calendar.getInstance();
+        today = Calendar.getInstance();
         String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
         loadTaskList(date);
         setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
@@ -70,13 +71,23 @@ public class MonthCalendarFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        refreshList();
+    }
+
+    public void refreshList() {
+        today = Calendar.getInstance();
+        String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
+        loadTaskList(date);
+        setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
     }
 
     private void loadTaskList(String date) {
         ArrayList<Task> tasksComplete = helper.getTaskListByDate(date);
         ArrayList<String> tasks = new ArrayList<>();
+        String output;
         for(Task t : tasksComplete) {
-            tasks.add(t.getName());
+            output = "[" + t.getPriority() + "] " + t.getName();
+            tasks.add(output);
         }
 
         if(mAdapter==null){
