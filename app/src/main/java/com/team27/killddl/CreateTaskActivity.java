@@ -1,5 +1,9 @@
 package com.team27.killddl;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +16,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.team27.killddl.data.DBHelper;
+
+import java.util.Calendar;
 
 public class CreateTaskActivity extends AppCompatActivity {
 
@@ -52,12 +58,23 @@ public class CreateTaskActivity extends AppCompatActivity {
                 int year = taskDueDate.getYear();
                 String dateString = DBHelper.getDateString(year, month, day);
 
-                showToast("Date:" + dateString);
+                // showToast("Date:" + dateString);
 
                 SaveTask(taskName.getText().toString(),
                         taskDescription.getText().toString(),
                         getPriority(),
                         dateString);
+
+                // Sets notification for noon the day before a task is due
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+                Intent notificationIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                PendingIntent broadcast = PendingIntent.getBroadcast(getApplicationContext(), 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                Calendar cal = Calendar.getInstance();
+                cal.set(year, month, day-1, 12, 0, 0);
+                showToast("Notification Time:" + cal.getTime());
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
             }
         });
 
