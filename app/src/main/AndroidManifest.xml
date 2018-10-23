@@ -50,6 +50,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".EditTaskActivity"/>
+
         <activity
             android:name=".NotificationActivity"
             android:label="@string/title_activity_notification"
