@@ -96,6 +96,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return taskList;
     }
 
+    public
+
     public ArrayList<Task> getTaskListByDate(String date) {
         String where = "due_date=date('"+date+"')";
         ArrayList<Task> taskList = new ArrayList<>();
