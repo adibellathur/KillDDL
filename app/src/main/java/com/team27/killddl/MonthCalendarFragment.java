@@ -2,11 +2,13 @@ package com.team27.killddl;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.ListView;
@@ -65,6 +67,18 @@ public class MonthCalendarFragment extends Fragment {
             }
         });
 
+        monthTaskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                String value = (String)parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(view.getContext(), TaskViewActivity.class);
+                intent.putExtra("NAME", value);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -86,12 +100,12 @@ public class MonthCalendarFragment extends Fragment {
         ArrayList<String> tasks = new ArrayList<>();
         String output;
         for(Task t : tasksComplete) {
-            output = "[" + t.getPriority() + "] " + t.getName();
+            output = t.getName();
             tasks.add(output);
         }
 
         if(mAdapter==null){
-            mAdapter = new ArrayAdapter<>(view.getContext(),R.layout.row,R.id.list_taskName,tasks);
+            mAdapter = new ArrayAdapter<>(view.getContext(),R.layout.row_simple,R.id.list_taskName_Simple,tasks);
             monthTaskList.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
         }

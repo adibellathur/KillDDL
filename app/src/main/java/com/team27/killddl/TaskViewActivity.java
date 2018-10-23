@@ -1,5 +1,6 @@
 package com.team27.killddl;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -56,22 +57,22 @@ public class TaskViewActivity extends AppCompatActivity {
         showToast(description);
         int priority = t.getPriority();
         if(priority == 0){
-          //  textView_taskPriority.text.setTextColor(R.color.Red);
+            taskPriority.setTextColor(Color.BLUE);
         }
         else if(priority == 1){
-
+            taskPriority.setTextColor(Color.GREEN);
         }
         else if(priority == 2){
-
+            taskPriority.setTextColor(Color.YELLOW);
         }
         else if(priority == 3){
-
+            taskPriority.setTextColor(Color.parseColor("#FFA500"));
         }
         else if(priority == 4){
-
+            taskPriority.setTextColor(Color.RED);
         }
 
-        taskName.setText("Name: " + tname);
+        taskName.setText(tname);
         taskPriority.setText("Priority: " + Integer.toString(priority));
         taskDate.setText("Due Date: " + date);
         taskDescription.setText("Description: \n" + description);
