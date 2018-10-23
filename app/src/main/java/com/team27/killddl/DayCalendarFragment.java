@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.team27.killddl.data.DBHelper;
 import com.team27.killddl.data.Task;
@@ -52,6 +54,24 @@ public class DayCalendarFragment extends Fragment {
         today = Calendar.getInstance();
         String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
 
+        taskList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                String value = (String)parent.getItemAtPosition(position);
+                /*Toast.makeText(getActivity().getApplicationContext(),
+                        "Name: " + value, Toast.LENGTH_LONG)
+                        .show();*/
+
+                Intent intent = new Intent(view.getContext(), TaskViewActivity.class);
+                intent.putExtra("NAME", value);
+               /* Toast.makeText(getActivity().getApplicationContext(),
+                        "created intent", Toast.LENGTH_LONG)
+                        .show();*/
+                startActivity(intent);
+            }
+        });
+
         loadTaskList(date);
         setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
         refreshList();
@@ -76,12 +96,14 @@ public class DayCalendarFragment extends Fragment {
     private void loadTaskList(String date) {
         ArrayList<Task> tasksComplete = helper.getTaskListByDate(date);
         ArrayList<String> tasks = new ArrayList<>();
+        String output;
         for(Task t : tasksComplete) {
-            tasks.add(t.getName());
+            output = t.getName();
+            tasks.add(output);
         }
 
         if(mAdapter==null){
-            mAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.row,R.id.list_taskName,tasks);
+            mAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.row_simple,R.id.list_taskName_Simple,tasks);
             taskList.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
         }

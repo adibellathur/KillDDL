@@ -84,8 +84,10 @@ public class MonthCalendarFragment extends Fragment {
     private void loadTaskList(String date) {
         ArrayList<Task> tasksComplete = helper.getTaskListByDate(date);
         ArrayList<String> tasks = new ArrayList<>();
+        String output;
         for(Task t : tasksComplete) {
-            tasks.add(t.getName());
+            output = "[" + t.getPriority() + "] " + t.getName();
+            tasks.add(output);
         }
 
         if(mAdapter==null){

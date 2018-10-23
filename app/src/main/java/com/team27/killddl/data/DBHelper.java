@@ -126,4 +126,29 @@ public class DBHelper extends SQLiteOpenHelper {
         String formattedDate = sdf.format(calendar.getTime());
         return formattedDate;
     }
+
+    //NOTE: CAN RETURN NULL
+    public Task getTask(String name) { //or parameter of type task
+        Task t = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
+                null, null, null, null, TaskContract.DATE_SORT);
+        while (cursor.moveToNext()) {
+            int nameIndex = cursor.getColumnIndex(NAME);
+            int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
+            int priorityIndex = cursor.getColumnIndex(PRIORITY);
+            int dateIndex = cursor.getColumnIndex(DUE_DATE);
+            if(cursor.getString(nameIndex).equals(name)) {
+                t = new Task(cursor.getString(nameIndex),
+                                cursor.getString(descriptionIndex),
+                                cursor.getInt(priorityIndex),
+                                cursor.getString(dateIndex));
+            }
+        }
+        cursor.close();
+        db.close();
+        return t;
+    }
+
+
 }
