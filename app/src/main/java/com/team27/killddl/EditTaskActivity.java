@@ -61,11 +61,33 @@ public class EditTaskActivity extends AppCompatActivity {
         String[] due = date.split("-");
         showToast("Year: " + due[0] + "Month: " + due[1] + "Year: " + due[2]);
         taskDueDate.updateDate(Integer.parseInt(due[0]), Integer.parseInt(due[1])-1, Integer.parseInt(due[2]));
+        String id = "";
+        RadioButton rd = (RadioButton) taskPriority.findViewById(R.id.color_blue);
+        if(priority == 0){
+            //id = "color_blue";
+            rd = (RadioButton) taskPriority.findViewById(R.id.color_blue);
+        }
+        else if(priority == 1){
+            //id = "color_green";
+            rd = (RadioButton) taskPriority.findViewById(R.id.color_green);
+        }
+        else if(priority == 2){
+            //id = "color_yellow";
+            rd = (RadioButton) taskPriority.findViewById(R.id.color_yellow);
+        }
+        else if(priority == 3){
+            //id = "color_orange";
+            rd = (RadioButton) taskPriority.findViewById(R.id.color_orange);
+        }
+        else if(priority == 4){
+            //id = "color_red";
+            rd = (RadioButton) taskPriority.findViewById(R.id.color_red);
+        }
 
-        /*showToast("priority: " + priority);
-        int id = taskPriority.getCheckedRadioButtonId();
-        RadioButton rd = (RadioButton) taskPriority.findViewById(id);
-        rd.setChecked(true);*/
+        showToast("priority: " + priority);
+        //int id = taskPriority.getCheckedRadioButtonId();
+
+        rd.setChecked(true);
 
 
         Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
