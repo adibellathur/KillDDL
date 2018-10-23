@@ -61,9 +61,16 @@ public class DayCalendarFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 String value = (String)parent.getItemAtPosition(position);
-                Toast.makeText(getActivity().getApplicationContext(),
+                /*Toast.makeText(getActivity().getApplicationContext(),
                         "Name: " + value, Toast.LENGTH_LONG)
-                        .show();
+                        .show();*/
+
+                Intent intent = new Intent(view.getContext(), TaskViewActivity.class);
+                intent.putExtra("NAME", value);
+               /* Toast.makeText(getActivity().getApplicationContext(),
+                        "created intent", Toast.LENGTH_LONG)
+                        .show();*/
+                startActivity(intent);
             }
         });
 
