@@ -1,9 +1,7 @@
 package com.team27.killddl;
 
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -95,7 +93,7 @@ public class DayCalendarFragment extends Fragment {
     }
 
     private void setDate(int monthOfYear, int dayOfMonth, int year) {
-        dateDisplay.setText("Tasks Today: (" + (monthOfYear + 1) + "/"
+        dateDisplay.setText("Tasks Today (" + (monthOfYear + 1) + "/"
                 + dayOfMonth + "/" + year + ")");
     }
 
