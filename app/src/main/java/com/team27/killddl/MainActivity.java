@@ -109,11 +109,11 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
-    public void deleteTask(View view){
-        View parent = (View)view.getParent();
-        TextView taskTextView = (TextView) parent.findViewById(R.id.list_taskName);
-        String task = String.valueOf(taskTextView.getText());
-        helper.deleteTask(task);
-        calendarFragment.refreshTaskLists();
-    }
+//    public void deleteTask(View view){
+//        View parent = (View)view.getParent();
+//        TextView taskTextView = (TextView) parent.findViewById(R.id.list_taskName);
+//        String task = String.valueOf(taskTextView.getText());
+//        helper.deleteTask(task);
+//        calendarFragment.refreshTaskLists();
+//    }
 }

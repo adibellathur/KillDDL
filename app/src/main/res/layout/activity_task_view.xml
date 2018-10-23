@@ -21,26 +21,25 @@
             android:layout_width="0dp"
             android:layout_height="43dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_taskDate" />
 
         <TextView
             android:id="@+id/textView_taskDate"
             android:layout_width="0dp"
             android:layout_height="43dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="70dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:layout_editor_absoluteY="70dp" />
 
         <TextView
             android:id="@+id/textView_taskPriority"
@@ -63,10 +62,24 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
+            android:textSize="32sp"
             app:layout_constraintEnd_toStartOf="@+id/textView_taskPriority"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="deleteTask"
+            android:text="Delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_taskDescription" />
     </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>

@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class TaskViewActivity extends AppCompatActivity {
     private TextView taskDescription;
     private TextView taskDate;
     private TextView taskPriority;
+    private Button deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class TaskViewActivity extends AppCompatActivity {
         taskPriority = (TextView) findViewById(R.id.textView_taskPriority);
         taskDate = (TextView) findViewById(R.id.textView_taskDate);
         taskDescription = (TextView) findViewById(R.id.textView_taskDescription);
+        deleteButton = (Button) findViewById(R.id.button_delete);
 
         String name= getIntent().getStringExtra("NAME"); //from DayCalandarFragment intent
         showToast(name);
@@ -52,6 +55,21 @@ public class TaskViewActivity extends AppCompatActivity {
         String description = t.getDescription();
         showToast(description);
         int priority = t.getPriority();
+        if(priority == 0){
+          //  textView_taskPriority.text.setTextColor(R.color.Red);
+        }
+        else if(priority == 1){
+
+        }
+        else if(priority == 2){
+
+        }
+        else if(priority == 3){
+
+        }
+        else if(priority == 4){
+
+        }
 
         taskName.setText("Name: " + tname);
         taskPriority.setText("Priority: " + Integer.toString(priority));
@@ -64,6 +82,16 @@ public class TaskViewActivity extends AppCompatActivity {
         toast = Toast.makeText(TaskViewActivity.this, content, Toast.LENGTH_SHORT);
         toast.setMargin(0, (float)0.07);
         toast.show();
+    }
+
+    public void deleteTask(View view){
+        View parent = (View)view.getParent();
+        TextView taskTextView = (TextView) parent.findViewById(R.id.textView_taskName);
+        String task = String.valueOf(taskTextView.getText());
+        showToast("deleting " + task);
+        helper.deleteTask(task);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
 
