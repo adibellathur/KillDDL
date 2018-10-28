@@ -8,15 +8,19 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.team27.killddl.data.DBHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CreateTaskActivity extends AppCompatActivity {
@@ -28,6 +32,8 @@ public class CreateTaskActivity extends AppCompatActivity {
     private EditText taskDescription;
     private DatePicker taskDueDate;
     private RadioGroup taskPriority;
+    private Spinner frequency;
+    private EditText numRecurs;
 
 
     @Override
@@ -45,6 +51,12 @@ public class CreateTaskActivity extends AppCompatActivity {
         taskDueDate = (DatePicker) findViewById(R.id.taskDate);
         taskPriority = (RadioGroup) findViewById(R.id.taskPriority);
 
+        frequency = (Spinner) findViewById(R.id.spinner1);
+        numRecurs = (EditText) findViewById(R.id.numRecurrences);
+        //numRecurs.setText(0);
+        String[] items = new String[]{"Only once", "Daily", "Weekly", "Monthly", "Yearly"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        frequency.setAdapter(adapter);
 
         Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -57,13 +69,58 @@ public class CreateTaskActivity extends AppCompatActivity {
                 int month= taskDueDate.getMonth();
                 int year = taskDueDate.getYear();
                 String dateString = DBHelper.getDateString(year, month, day);
+                //showToast("Year: " + year + "Month: " + month + "Day: " + day);
+                String d = Integer.toString(day);
+                if(day < 10) d = "0" + d;
+                String m = Integer.toString(month+1);
+                if(month < 10) m = "0" + m;
+                String y = Integer.toString(year);
+                String dt = y + "-" + m + "-" + d;  // Start date
+                showToast(dt);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar c = Calendar.getInstance();
+                try {
+                    c.setTime(sdf.parse(dt));
+                }catch(ParseException pe){
+                    showToast("failed to parse!");
+                }
 
-                // showToast("Date:" + dateString);
+                //showToast("incremented: " + dt);
+                String freq = frequency.getSelectedItem().toString();
+                //showToast("frequency" + freq);
 
-                SaveTask(taskName.getText().toString(),
-                        taskDescription.getText().toString(),
-                        getPriority(),
-                        dateString);
+                 showToast("Date:" + dateString);
+                if(freq.equals("Only once")){
+                    SaveTask(taskName.getText().toString(),
+                            taskDescription.getText().toString(),
+                            getPriority(),
+                            dateString);
+                }
+               else{
+                    int numR = Integer.parseInt(numRecurs.getText().toString());
+                    int amount;
+                    for(int i = 0; i < numR; ++i) {
+                        String[] parts = dt.split("-");
+                        dateString = DBHelper.getDateString(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]) - 1,
+                                Integer.parseInt(parts[2]));
+                        SaveTask(taskName.getText().toString(),
+                                taskDescription.getText().toString(),
+                                getPriority(),
+                                dateString);
+                        if(freq.equals("Daily"))
+                            c.add(Calendar.DATE, 1);
+                        else if(freq.equals("Weekly"))
+                            c.add(Calendar.DATE, 7);
+                        else if(freq.equals("Monthly"))
+                            c.add(Calendar.MONTH, 1);
+                        else if(freq.equals("Yearly")){
+                            c.add(Calendar.YEAR, 1);
+                        }
+                        dt = sdf.format(c.getTime());
+                    }
+
+                }
+
 
                 // Sets notification for noon the day before a task is due
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -73,7 +130,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
                 Calendar cal = Calendar.getInstance();
                 cal.set(year, month, day-1, 12, 0, 0);
-                showToast("Notification Time:" + cal.getTime());
+                //showToast("Notification Time:" + cal.getTime());
                 alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
             }
         });
