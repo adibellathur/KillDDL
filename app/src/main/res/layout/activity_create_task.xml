@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_create_task"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.team27.killddl.CreateTaskActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,12 +119,12 @@
             android:textAppearance="@android:style/TextAppearance.Material.Title" />
 
         <Spinner
-            android:text="Frequency"
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"/>
+            android:spinnerMode="dropdown"
+            android:text="Frequency" />
 
         <TextView
             android:id="@+id/textView9"
@@ -137,7 +138,7 @@
             android:id="@+id/numRecurrences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="number" />
 
         <Button
             android:id="@+id/btnSubmit"

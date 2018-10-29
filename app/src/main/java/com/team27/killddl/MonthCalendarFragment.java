@@ -56,7 +56,7 @@ public class MonthCalendarFragment extends Fragment {
         loadTaskList(date);
         setDate(today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH), today.get(Calendar.YEAR));
 
-        CalendarView calendarView = view.findViewById(R.id.calendarView);
+        CalendarView calendarView = view.findViewById(R.id.monthCalendarView);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int monthOfYear,
