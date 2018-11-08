@@ -1,11 +1,7 @@
 package com.team27.killddl;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -15,12 +11,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.team27.killddl.data.DBHelper;
-
-import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager manager;
 
     public CalendarFragment calendarFragment;
-    public NotificationsFragment notificationsFragment;
+    public ImportantFragment importantFragment;
     public SettingsFragment settingsFragment;
 
     @Override
@@ -39,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         calendarFragment = new CalendarFragment();
-        notificationsFragment = new NotificationsFragment();
+        importantFragment = new ImportantFragment();
         settingsFragment = new SettingsFragment();
 
         toolbar = getSupportActionBar();
@@ -62,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(calendarFragment);
                         showToast("Calendar pressed");
                         break;
-                    case R.id.action_notification:
-                        toolbar.setTitle("Notifications");
-                        loadFragment(notificationsFragment);
-                        showToast("Notifications pressed");
+                    case R.id.action_important:
+                        toolbar.setTitle("Important");
+                        loadFragment(importantFragment);
+                        showToast("Important pressed");
                         break;
                     case R.id.action_settings:
                         toolbar.setTitle("Settings");

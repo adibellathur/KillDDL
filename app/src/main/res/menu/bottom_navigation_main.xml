@@ -11,10 +11,10 @@
     </item>
 
     <item
-        android:id="@+id/action_notification"
+        android:id="@+id/action_important"
         android:enabled="true"
         android:icon="@drawable/ic_notification"
-        android:title="Notifications"
+        android:title="Important"
         app:showAsAction="ifRoom">
     </item>
 

@@ -14,7 +14,7 @@ public class TaskContract {
 
     /* Sort order constants */
     //Priority first, Completed last, the rest by date
-    public static final String DEFAULT_SORT = String.format("%s ASC, %s DESC, %s ASC",
+    public static final String PRIORITY_SORT = String.format("%s ASC, %s DESC, %s ASC",
             TaskColumns.IS_COMPLETE, TaskColumns.PRIORITY, TaskColumns.DUE_DATE);
 
     //Completed last, then by date, followed by priority

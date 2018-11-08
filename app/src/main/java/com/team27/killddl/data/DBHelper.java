@@ -119,6 +119,28 @@ public class DBHelper extends SQLiteOpenHelper {
         return taskList;
     }
 
+    public ArrayList<Task> getTaskListByPriority() {
+        ArrayList<Task> taskList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
+                null, null, null, null, TaskContract.PRIORITY_SORT);
+        while (cursor.moveToNext()) {
+            int nameIndex = cursor.getColumnIndex(NAME);
+            int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
+            int priorityIndex = cursor.getColumnIndex(PRIORITY);
+            int dateIndex = cursor.getColumnIndex(DUE_DATE);
+            taskList.add(
+                    new Task(cursor.getString(nameIndex),
+                            cursor.getString(descriptionIndex),
+                            cursor.getInt(priorityIndex),
+                            cursor.getString(dateIndex))
+            );
+        }
+        cursor.close();
+        db.close();
+        return taskList;
+    }
+
     public static String getDateString(int year, int month, int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
