@@ -29,9 +29,9 @@ public class DayCalendarFragment extends Fragment {
     View view;
     Context context;
     TextView dateDisplay;
-    ListView taskList;
+    DynamicListView taskList;
     DBHelper helper;
-    ArrayAdapter<String> mAdapter;
+    StableArrayAdapter mAdapter;
     Calendar today;
     Button btnDate;
     private int mYear, mMonth, mDay;
@@ -50,7 +50,9 @@ public class DayCalendarFragment extends Fragment {
         context = container.getContext();
         helper = new DBHelper(view.getContext());
         dateDisplay = (TextView) view.findViewById(R.id.dateDisplay);
-        taskList = (ListView) view.findViewById(R.id.taskList);
+        showToast("trying to make tasklist");
+        taskList = (DynamicListView) view.findViewById(R.id.taskList);
+
         btnDate = (Button) view.findViewById(R.id.btnDate);
         today = Calendar.getInstance();
         String date = DBHelper.getDateString(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH));
@@ -93,18 +95,27 @@ public class DayCalendarFragment extends Fragment {
         ArrayList<String> tasks = new ArrayList<>();
         String output;
         for(Task t : tasksComplete) {
+            showToast(t.getName());
             output = t.getName();
             tasks.add(output);
         }
 
         if(mAdapter==null){
-            mAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.row_simple,R.id.list_taskName_Simple,tasks);
+            showToast("trying to load tasks");
+            mAdapter = new StableArrayAdapter(view.getContext(),R.layout.row_simple,tasks);
+            taskList.setCheeseList(tasks);
             taskList.setAdapter(mAdapter);
+            taskList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             mAdapter.notifyDataSetChanged();
+
+
         }
         else{
             mAdapter.clear();
-            mAdapter.addAll(tasks);
+            taskList.setCheeseList(tasks);
+            taskList.setAdapter(mAdapter);
+            taskList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+//            mAdapter.addAll(tasks);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -113,6 +124,10 @@ public class DayCalendarFragment extends Fragment {
         dateDisplay.setText("Tasks Today (" + (monthOfYear + 1) + "/"
                 + dayOfMonth + "/" + year + ")");
     }
-
+    private void showToast(String content) {
+        Toast toast = Toast.makeText(this.getContext(), content, Toast.LENGTH_SHORT);
+        toast.setMargin(0, (float)0.07);
+        toast.show();
+    }
 
 }
