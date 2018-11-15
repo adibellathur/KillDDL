@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private CallbackManager callbackManager;
     private TextView skipText;
+    private Button login;
 
 
     @Override
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Facebook LoginActivity
         FacebookSdk.sdkInitialize(FacebookSdk.getApplicationContext());
-
+        login = findViewById(R.id.btnSubmit);
         loginButton = findViewById(R.id.login_button);
         callbackManager = CallbackManager.Factory.create();
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
@@ -75,7 +77,18 @@ public class LoginActivity extends AppCompatActivity {
                 showToast("error " + error.toString());
             }
         });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent next = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(next);
+
+            }
+        });
     }
+
 
     private void showToast(String content) {
         Toast toast;
