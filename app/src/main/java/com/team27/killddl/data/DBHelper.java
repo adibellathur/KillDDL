@@ -74,6 +74,12 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteAllTasks(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ DB_TABLE);
+        db.close();
+    }
+
     public ArrayList<Task> getTaskList() {
         ArrayList<Task> taskList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();

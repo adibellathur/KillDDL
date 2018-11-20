@@ -7,12 +7,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -23,6 +27,7 @@ import com.facebook.login.Login;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.team27.killddl.R;
+import com.team27.killddl.data.DBHelper;
 
 import java.util.Arrays;
 
@@ -35,7 +40,11 @@ public class  SettingsFragment extends Fragment {
     private Button loginLogout;
     private Switch toggleDark;
     private Switch toggleNotifs;
-
+    private Button reset;
+    private Button Close;
+    DBHelper helper;
+    PopupWindow popUp;
+    LinearLayout layout;
     public SettingsFragment() {
         // Required empty public constructor
     }
@@ -92,8 +101,67 @@ public class  SettingsFragment extends Fragment {
                 startActivity(i);
             }
         });
+        helper = new DBHelper(view.getContext());
+        reset = (Button)view.findViewById(R.id.reset);
+        popUp = new PopupWindow(getContext());
+        layout = new LinearLayout(getContext());
+
+
+
+
+
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                showPopup();
+                //helper.deleteAllTasks();
+                showToast("Deleted all tasks.");
+                //Intent i = new Intent(view.getContext(),LoginActivity.class);
+                //AccessToken.setCurrentAccessToken(null);
+                //startActivity(i);
+            }
+        });
+
+
+
+
 
         return view;
     }
+
+
+    private void showToast(String content) {
+        Toast toast;
+        toast = Toast.makeText(this.getContext(), content, Toast.LENGTH_SHORT);
+        toast.setMargin(0, (float)0.07);
+        toast.show();
+    }
+
+    private void showPopup() {
+        try {
+// We need to get the instance of the LayoutInflater
+            LayoutInflater inflater2 = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = inflater2.inflate(R.layout.popup, (ViewGroup) view.findViewById(R.id.popup_1));
+            popUp = new PopupWindow(layout, 300, 370, true);
+            popUp.showAtLocation(layout, Gravity.CENTER, 0, 0);
+            Close = (Button) layout.findViewById(R.id.close_popup);
+            Close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popUp.dismiss();
+                    helper.deleteAllTasks();
+
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    };
+
+
+
+
 
 }
