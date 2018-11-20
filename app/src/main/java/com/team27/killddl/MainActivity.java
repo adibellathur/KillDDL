@@ -65,17 +65,17 @@ public class MainActivity extends AppCompatActivity {
                         toolbar.setTitle("Calendar");
                         calendarFragment.refreshTaskLists();
                         loadFragment(calendarFragment);
-                        showToast("Calendar pressed");
+//                        showToast("Calendar pressed");
                         break;
                     case R.id.action_important:
                         toolbar.setTitle("Important");
                         loadFragment(importantFragment);
-                        showToast("Important pressed");
+//                        showToast("Important pressed");
                         break;
                     case R.id.action_settings:
                         toolbar.setTitle("Settings");
                         loadFragment(settingsFragment);
-                        showToast("Settings pressed");
+//                        showToast("Settings pressed");
                         break;
                 }
                 return true;

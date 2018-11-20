@@ -50,7 +50,6 @@ public class DayCalendarFragment extends Fragment {
         context = container.getContext();
         helper = new DBHelper(view.getContext());
         dateDisplay = (TextView) view.findViewById(R.id.dateDisplay);
-        showToast("trying to make tasklist");
         taskList = (DynamicListView) view.findViewById(R.id.taskList);
 
         btnDate = (Button) view.findViewById(R.id.btnDate);
@@ -94,28 +93,24 @@ public class DayCalendarFragment extends Fragment {
         ArrayList<Task> tasksComplete = helper.getTaskListByDate(date);
         ArrayList<String> tasks = new ArrayList<>();
         String output;
-        for(Task t : tasksComplete) {
-            showToast(t.getName());
+        for (Task t : tasksComplete) {
             output = t.getName();
             tasks.add(output);
         }
 
-        if(mAdapter==null){
-            showToast("trying to load tasks");
-            mAdapter = new StableArrayAdapter(view.getContext(),R.layout.row_simple,tasks);
+        if (mAdapter == null) {
+            mAdapter = new StableArrayAdapter(view.getContext(), R.layout.text_view, tasks);
             taskList.setCheeseList(tasks);
             taskList.setAdapter(mAdapter);
-            taskList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-            mAdapter.notifyDataSetChanged();
-        }
-        else{
+        } else {
             mAdapter.clear();
+            mAdapter = new StableArrayAdapter(view.getContext(), R.layout.text_view, tasks);
             taskList.setCheeseList(tasks);
             taskList.setAdapter(mAdapter);
-            taskList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-            //mAdapter.addAll(tasks);
-            mAdapter.notifyDataSetChanged();
         }
+        taskList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        mAdapter.notifyDataSetChanged();
+
     }
 
     private void setDate(int monthOfYear, int dayOfMonth, int year) {
@@ -123,11 +118,9 @@ public class DayCalendarFragment extends Fragment {
                 + dayOfMonth + "/" + year + ")");
     }
     private void showToast(String content) {
-        /*
         Toast toast = Toast.makeText(this.getContext(), content, Toast.LENGTH_SHORT);
         toast.setMargin(0, (float)0.07);
         toast.show();
-        */
     }
 
 }
