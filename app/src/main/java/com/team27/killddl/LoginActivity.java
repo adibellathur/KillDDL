@@ -1,6 +1,8 @@
 package com.team27.killddl;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,9 +33,23 @@ public class LoginActivity extends AppCompatActivity {
     private TextView skipText;
     private Button login;
 
+    SharedPreferences prefs;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Dark = "darkKey";
+    public static final String Notification = "notificationKey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (!prefs.contains(Dark)) {
+            prefs.edit().putBoolean(Dark, false).commit();
+            prefs.edit().putBoolean(Notification, true).commit();
+        }
+        if (prefs.getBoolean(Dark, true)) {
+            setTheme(R.style.Dark);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 

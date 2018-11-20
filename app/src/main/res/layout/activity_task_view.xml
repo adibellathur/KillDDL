@@ -24,6 +24,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +38,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +52,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="TextView"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView_taskName"
@@ -63,6 +66,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="32sp"
             app:layout_constraintEnd_toStartOf="@+id/textView_taskPriority"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -76,11 +80,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="48dp"
+            android:background="?attr/colorPrimaryDark"
             android:onClick="deleteTask"
             android:text="Delete"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_taskDescription"
-            android:background="@color/colorSecondaryAccent"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView_taskDescription" />
 
         <Button
             android:id="@+id/edit_button"
@@ -91,6 +96,7 @@
             android:layout_marginTop="24dp"
             android:onClick="editTask"
             android:text="Edit"
+            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_taskDescription" />
     </android.support.constraint.ConstraintLayout>

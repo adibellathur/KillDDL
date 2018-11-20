@@ -4,7 +4,7 @@
     android:id="@+id/fragment_notifications"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.team27.killddl.ImportantFragment">
+    tools:context=".ImportantFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,6 +31,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Tasks Sorted by Priority"
+                android:textColor="@color/com_facebook_button_background_color_disabled"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/taskListPriority"
                 app:layout_constraintHorizontal_bias="0.678"

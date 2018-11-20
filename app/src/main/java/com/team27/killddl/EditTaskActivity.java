@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -39,9 +40,17 @@ public class EditTaskActivity extends AppCompatActivity {
     private EditText numRecurs;
     public String name;
 
+    SharedPreferences prefs;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Dark = "darkKey";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (prefs.getBoolean(Dark, true)) {
+            setTheme(R.style.Dark);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
 

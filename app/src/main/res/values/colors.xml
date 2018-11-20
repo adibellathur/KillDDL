@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e3f2fd</color>
-    <color name="colorPrimaryDark">#b1bfca</color>
-    <color name="colorPrimaryLight">#ffffff</color>
-    <color name="colorAccent">#448aff</color>
-    <color name="colorAccentDark">#005ecb</color>
-    <color name="colorAccentLight">#83b9ff</color>
-    <color name="colorSecondaryAccent">#ef5350</color>
-    <color name="colorSecondaryAccentDark">#b61827</color>
-    <color name="colorSecondaryAccentLight">#ff867c</color>
+    <color name="defaultColorPrimary">#ffffff</color>
+    <color name="defaultColorPrimaryDark">#7e7e7e</color>
+    <color name="defaultColorPrimaryLight">#ffffff</color>
+    <color name="defaultColorAccent">#448aff</color>
+    <color name="defaultColorAccentDark">#005ecb</color>
+    <color name="defaultColorAccentLight">#83b9ff</color>
+    <color name="defaultColorSecondaryAccent">#ef5350</color>
+    <color name="defaultColorSecondaryAccentDark">#b61827</color>
+    <color name="defaultColorSecondaryAccentLight">#ff867c</color>
+    <color name="default_foreground_material_light">#616161</color>
+    <color name="default_text_color_primary">#ec575757</color>
+    <color name="default_text_color_secondary">#ddffffff</color>
+
+    <color name="darkColorPrimary">#000000</color>
+    <color name="darkColorPrimaryDark">#c7c7c7</color>
+    <color name="darkColorPrimaryLight">#ffffff</color>
+    <color name="darkColorAccent">#42b55f</color>
+    <color name="darkColorAccentDark">#005ecb</color>
+    <color name="darkColorAccentLight">#000000</color>
+    <color name="darkColorSecondaryAccent">#ef5350</color>
+    <color name="darkColorSecondaryAccentDark">#b61827</color>
+    <color name="darkColorSecondaryAccentLight">#ff867c</color>
+    <color name="dark_foreground_material_light">#616161</color>
+    <color name="dark_text_color_primary">#ffffff</color>
+    <color name="dark_text_color_secondary">#ddffffff</color>
 </resources>

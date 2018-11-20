@@ -107,15 +107,13 @@ public class DayCalendarFragment extends Fragment {
             taskList.setAdapter(mAdapter);
             taskList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             mAdapter.notifyDataSetChanged();
-
-
         }
         else{
             mAdapter.clear();
             taskList.setCheeseList(tasks);
             taskList.setAdapter(mAdapter);
             taskList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-//            mAdapter.addAll(tasks);
+            //mAdapter.addAll(tasks);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -125,9 +123,11 @@ public class DayCalendarFragment extends Fragment {
                 + dayOfMonth + "/" + year + ")");
     }
     private void showToast(String content) {
+        /*
         Toast toast = Toast.makeText(this.getContext(), content, Toast.LENGTH_SHORT);
         toast.setMargin(0, (float)0.07);
         toast.show();
+        */
     }
 
 }

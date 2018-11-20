@@ -1,6 +1,8 @@
 package com.team27.killddl;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -26,8 +28,18 @@ public class MainActivity extends AppCompatActivity {
     public ImportantFragment importantFragment;
     public SettingsFragment settingsFragment;
 
+    SharedPreferences prefs;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Dark = "darkKey";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (prefs.getBoolean(Dark, true)) {
+            setTheme(R.style.Dark);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

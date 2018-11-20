@@ -1,5 +1,7 @@
 package com.team27.killddl;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,8 +37,22 @@ public class TaskViewActivity extends AppCompatActivity {
     private TextView taskPriority;
     private Button deleteButton;
     public String tname;
+
+    SharedPreferences prefs;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Dark = "darkKey";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (!prefs.contains(Dark)) {
+            prefs.edit().putBoolean(Dark, false);
+        }
+        if (prefs.getBoolean(Dark, true)) {
+            setTheme(R.style.Dark);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_view);
 
