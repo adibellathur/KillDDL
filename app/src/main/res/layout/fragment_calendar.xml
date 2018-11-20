@@ -15,12 +15,10 @@
         android:id="@+id/calendar_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorAccent"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/colorAccent"
-        app:tabTextColor="@color/colorPrimaryDark"
+        app:tabSelectedTextColor="?android:attr/textColorPrimary"
+        app:tabTextColor="?android:attr/textColorPrimaryInverse"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="1dp" />
 

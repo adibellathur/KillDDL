@@ -51,6 +51,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Tasks Today (01/01/2018)"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/taskList"
                 app:layout_constraintHorizontal_bias="0.678"
@@ -60,7 +61,7 @@
 
             <com.team27.killddl.DynamicListView
                 android:id="@+id/taskList"
-                android:layout_width="365dp"
+                android:layout_width="match_parent"
                 android:layout_height="374dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"

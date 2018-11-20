@@ -25,7 +25,8 @@
             android:id="@+id/taskName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="What needs to be done?" />
+            android:hint="What needs to be done?"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
 
         <TextView
             android:id="@+id/textView6"
@@ -40,7 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Additional information"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
 
         <TextView
             android:id="@+id/dateLabel"
@@ -77,35 +79,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/blue"
-                android:text="0" />
+                android:text="0"
+                android:textColor="@color/blue" />
 
             <RadioButton
                 android:id="@+id/color_green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/green"
-                android:text="1" />
+                android:text="1"
+                android:textColor="@color/green" />
 
             <RadioButton
                 android:id="@+id/color_yellow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/yellow"
-                android:text="2" />
+                android:text="2"
+                android:textColor="@color/yellow" />
 
             <RadioButton
                 android:id="@+id/color_orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/orange"
-                android:text="3" />
+                android:text="3"
+                android:textColor="@color/orange" />
 
             <RadioButton
                 android:id="@+id/color_red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/red"
-                android:text="4" />
+                android:text="4"
+                android:textColor="@color/red" />
 
         </RadioGroup>
 
@@ -138,7 +145,8 @@
             android:id="@+id/numRecurrences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="?android:attr/textColorPrimaryInverse" />
 
         <Button
             android:id="@+id/btnSubmit"
@@ -146,6 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
+            android:background="?attr/colorButtonNormal"
             android:text="Save Task" />
 
 

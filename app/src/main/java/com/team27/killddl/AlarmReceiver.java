@@ -8,12 +8,17 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 
 public class AlarmReceiver extends BroadcastReceiver{
     private static final String CHANNEL_ID = "com.team27.killddl.channelId";
+
+    SharedPreferences prefs;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Notification = "notificationKey";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -48,6 +53,11 @@ public class AlarmReceiver extends BroadcastReceiver{
             notificationManager.createNotificationChannel(channel);
         }
 
-        notificationManager.notify(0, notification);
+        // Send notification if user has notifications enabled
+        SharedPreferences prefs = context.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (prefs.getBoolean(Notification, true)) {
+            notificationManager.notify(0, notification);
+        }
+
     }
 }

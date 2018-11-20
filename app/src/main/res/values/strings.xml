@@ -6,6 +6,7 @@
     <string name="title_activity_create_task">CreateTask</string>
 
     <!-- Strings related to Settings -->
+    <string name="theme">@style/Dark</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
