@@ -94,8 +94,12 @@ public class DayCalendarFragment extends Fragment {
         ArrayList<String> tasks = new ArrayList<>();
         String output;
         for (Task t : tasksComplete) {
-            output = t.getName();
-            tasks.add(output);
+
+            if(t.isComplete() == 0){
+                output = t.getName();
+                tasks.add(output);
+            }
+
         }
 
         if (mAdapter == null) {

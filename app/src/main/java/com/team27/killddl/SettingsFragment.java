@@ -11,9 +11,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -28,8 +32,11 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.team27.killddl.R;
 import com.team27.killddl.data.DBHelper;
+import com.team27.killddl.data.Task;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +49,10 @@ public class  SettingsFragment extends Fragment {
     private Switch toggleNotifs;
     private Button reset;
     private Button Close;
+    private ListView completedTasks;
+    private ArrayAdapter<String> mAdapter;
+    private int numComplete;
+    private int getNumCompleteToday;
     DBHelper helper;
     PopupWindow popUp;
     LinearLayout layout;
@@ -105,8 +116,22 @@ public class  SettingsFragment extends Fragment {
         reset = (Button)view.findViewById(R.id.reset);
         popUp = new PopupWindow(getContext());
         layout = new LinearLayout(getContext());
+        completedTasks = (ListView) view.findViewById(R.id.completedTasks);
 
+        completedTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                String value = (String)parent.getItemAtPosition(position);
 
+                Intent intent = new Intent(view.getContext(), TaskViewActivity.class);
+                intent.putExtra("NAME", value);
+                startActivity(intent);
+            }
+        });
+
+        loadTaskList();
+        refreshList();
 
 
 
@@ -154,6 +179,35 @@ public class  SettingsFragment extends Fragment {
             e.printStackTrace();
         }
     };
+
+    public void refreshList() {
+        loadTaskList();
+    }
+
+    private void loadTaskList() {
+        ArrayList<Task> tasksComplete = helper.getTaskListByPriority();
+        ArrayList<String> tasks = new ArrayList<>();
+        String output;
+        for(Task t : tasksComplete) {
+            if(t.isComplete() == 1) {
+                output = t.getName();
+                tasks.add(output);
+            }
+        }
+
+        //if(mAdapter==null){
+        mAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.row_simple,R.id.list_taskName_Simple,tasks);
+        completedTasks.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+        /*
+        }
+        else{
+            mAdapter.clear();
+            mAdapter.addAll(tasks);
+            mAdapter.notifyDataSetChanged();
+        }
+        */
+    }
 
 
 

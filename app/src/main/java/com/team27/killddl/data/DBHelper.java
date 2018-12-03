@@ -99,18 +99,21 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Task> getTaskList() {
         ArrayList<Task> taskList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
+        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE, IS_COMPLETE},
                 null, null, null, null, TaskContract.DATE_SORT);
         while (cursor.moveToNext()) {
             int nameIndex = cursor.getColumnIndex(NAME);
             int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
             int priorityIndex = cursor.getColumnIndex(PRIORITY);
             int dateIndex = cursor.getColumnIndex(DUE_DATE);
+            int complete = cursor.getColumnIndex(IS_COMPLETE);
             taskList.add(
                     new Task(cursor.getString(nameIndex),
                             cursor.getString(descriptionIndex),
                             cursor.getInt(priorityIndex),
-                            cursor.getString(dateIndex))
+                            cursor.getString(dateIndex),
+                            cursor.getInt(complete)
+                    )
             );
         }
         cursor.close();
@@ -122,18 +125,20 @@ public class DBHelper extends SQLiteOpenHelper {
         String where = "due_date=date('"+date+"')";
         ArrayList<Task> taskList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
+        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE, IS_COMPLETE},
                 where, null, null, null, TaskContract.DATE_SORT);
         while (cursor.moveToNext()) {
             int nameIndex = cursor.getColumnIndex(NAME);
             int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
             int priorityIndex = cursor.getColumnIndex(PRIORITY);
             int dateIndex = cursor.getColumnIndex(DUE_DATE);
+            int complete = cursor.getColumnIndex(IS_COMPLETE);
             taskList.add(
                     new Task(cursor.getString(nameIndex),
                             cursor.getString(descriptionIndex),
                             cursor.getInt(priorityIndex),
-                            cursor.getString(dateIndex))
+                            cursor.getString(dateIndex),
+                            cursor.getInt(complete))
             );
         }
         cursor.close();
@@ -144,18 +149,20 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Task> getTaskListByPriority() {
         ArrayList<Task> taskList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
+        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE, IS_COMPLETE},
                 null, null, null, null, TaskContract.PRIORITY_SORT);
         while (cursor.moveToNext()) {
             int nameIndex = cursor.getColumnIndex(NAME);
             int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
             int priorityIndex = cursor.getColumnIndex(PRIORITY);
             int dateIndex = cursor.getColumnIndex(DUE_DATE);
+            int complete = cursor.getColumnIndex(IS_COMPLETE);
             taskList.add(
                     new Task(cursor.getString(nameIndex),
                             cursor.getString(descriptionIndex),
                             cursor.getInt(priorityIndex),
-                            cursor.getString(dateIndex))
+                            cursor.getString(dateIndex),
+                            cursor.getInt(complete))
             );
         }
         cursor.close();
