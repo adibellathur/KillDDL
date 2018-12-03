@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -51,8 +52,10 @@ public class  SettingsFragment extends Fragment {
     private Button Close;
     private ListView completedTasks;
     private ArrayAdapter<String> mAdapter;
+    private TextView numTaskComplete;
     private int numComplete;
     private int getNumCompleteToday;
+    private Button completedStats;
     DBHelper helper;
     PopupWindow popUp;
     LinearLayout layout;
@@ -116,22 +119,18 @@ public class  SettingsFragment extends Fragment {
         reset = (Button)view.findViewById(R.id.reset);
         popUp = new PopupWindow(getContext());
         layout = new LinearLayout(getContext());
-        completedTasks = (ListView) view.findViewById(R.id.completedTasks);
+        completedStats = (Button) view.findViewById(R.id.completedStats);
 
-        completedTasks.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        completedStats.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                String value = (String)parent.getItemAtPosition(position);
-
-                Intent intent = new Intent(view.getContext(), TaskViewActivity.class);
-                intent.putExtra("NAME", value);
-                startActivity(intent);
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent i = new Intent(view.getContext(),CompletedTaskView.class);
+                AccessToken.setCurrentAccessToken(null);
+                startActivity(i);
             }
         });
-
-        loadTaskList();
-        refreshList();
+        /**/
 
 
 
@@ -180,34 +179,7 @@ public class  SettingsFragment extends Fragment {
         }
     };
 
-    public void refreshList() {
-        loadTaskList();
-    }
 
-    private void loadTaskList() {
-        ArrayList<Task> tasksComplete = helper.getTaskListByPriority();
-        ArrayList<String> tasks = new ArrayList<>();
-        String output;
-        for(Task t : tasksComplete) {
-            if(t.isComplete() == 1) {
-                output = t.getName();
-                tasks.add(output);
-            }
-        }
-
-        //if(mAdapter==null){
-        mAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.row_simple,R.id.list_taskName_Simple,tasks);
-        completedTasks.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        /*
-        }
-        else{
-            mAdapter.clear();
-            mAdapter.addAll(tasks);
-            mAdapter.notifyDataSetChanged();
-        }
-        */
-    }
 
 
 
