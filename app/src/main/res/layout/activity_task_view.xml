@@ -14,6 +14,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
@@ -21,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="43dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="68dp"
             android:layout_marginEnd="8dp"
             android:text="TextView"
             android:textColor="?android:attr/textColorPrimary"
@@ -77,9 +79,9 @@
             android:id="@+id/button_delete"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="88dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="48dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="40dp"
             android:background="?attr/colorPrimaryDark"
             android:onClick="deleteTask"
             android:text="Delete"
@@ -92,13 +94,42 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="44dp"
             android:onClick="editTask"
             android:text="Edit"
             android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_taskDescription" />
+
+        <Button
+            android:id="@+id/complete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="completeTask"
+            android:text="Complete"
+            app:layout_constraintEnd_toStartOf="@+id/button_delete"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/edit_button"
+            app:layout_constraintTop_toBottomOf="@+id/textView_taskDescription" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="355dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/textView_taskDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_taskDate"
+            app:layout_constraintVertical_bias="0.037" />
     </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>

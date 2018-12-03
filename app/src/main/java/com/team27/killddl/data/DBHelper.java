@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
+import com.team27.killddl.TaskViewActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,6 +67,19 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(IS_COMPLETE, 0);
         values.put(PRIORITY, priority);
         values.put(DUE_DATE, date);
+        db.insertWithOnConflict(DB_TABLE,null,values,SQLiteDatabase.CONFLICT_REPLACE);
+        db.close();
+    }
+
+    public void insertNewTask(Task t){
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NAME,t.getName());
+        values.put(DESCRIPTION, t.getDescription());
+        values.put(IS_COMPLETE, t.isComplete());
+        values.put(PRIORITY, t.getPriority());
+        values.put(DUE_DATE, t.getDate());
+
         db.insertWithOnConflict(DB_TABLE,null,values,SQLiteDatabase.CONFLICT_REPLACE);
         db.close();
     }
@@ -159,8 +175,37 @@ public class DBHelper extends SQLiteOpenHelper {
     public Task getTask(String name) { //or parameter of type task
         Task t = null;
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE, IS_COMPLETE},
+                null, null, null, null, TaskContract.DATE_SORT);
+        while (cursor.moveToNext()) {
+            int nameIndex = cursor.getColumnIndex(NAME);
+            int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
+            int priorityIndex = cursor.getColumnIndex(PRIORITY);
+            int dateIndex = cursor.getColumnIndex(DUE_DATE);
+            int complete = cursor.getColumnIndex(IS_COMPLETE);
+            if(cursor.getString(nameIndex).equals(name)) {
+                t = new Task(cursor.getString(nameIndex),
+                                cursor.getString(descriptionIndex),
+                                cursor.getInt(priorityIndex),
+                                cursor.getString(dateIndex),
+                                cursor.getInt(complete));
+
+            }
+        }
+        cursor.close();
+        db.close();
+        return t;
+    }
+
+
+
+    public int markComplete(String name){
+        Task t = null;
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(DB_TABLE, new String[]{NAME, DESCRIPTION, PRIORITY, DUE_DATE},
                 null, null, null, null, TaskContract.DATE_SORT);
+        int success = 0;
+        boolean occur = false;
         while (cursor.moveToNext()) {
             int nameIndex = cursor.getColumnIndex(NAME);
             int descriptionIndex = cursor.getColumnIndex(DESCRIPTION);
@@ -168,14 +213,24 @@ public class DBHelper extends SQLiteOpenHelper {
             int dateIndex = cursor.getColumnIndex(DUE_DATE);
             if(cursor.getString(nameIndex).equals(name)) {
                 t = new Task(cursor.getString(nameIndex),
-                                cursor.getString(descriptionIndex),
-                                cursor.getInt(priorityIndex),
-                                cursor.getString(dateIndex));
+                        cursor.getString(descriptionIndex),
+                        cursor.getInt(priorityIndex),
+                        cursor.getString(dateIndex),
+                        1);
+
+               // String s = "sfg";
+                ContentValues cv  = new ContentValues();
+                cv.put(IS_COMPLETE, 1);
+                String[] args = {name};
+                db.update(DB_TABLE, cv, NAME + " = ?", args);
+                //cursor.close();
+                //db.close();
+                //return success;
             }
         }
         cursor.close();
         db.close();
-        return t;
+        return success;
     }
 
 

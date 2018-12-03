@@ -10,12 +10,21 @@ public class Task {
     private String description;
     private int priority;
     private String date;
-
+    private int complete;
     public Task(String name, String description, int priority, String date) {
         setName(name);
         setDescription(description);
         setPriority(priority);
         setDate(date);
+        complete = 0;
+    }
+
+    public Task(String name, String description, int priority, String date, int comp) {
+        setName(name);
+        setDescription(description);
+        setPriority(priority);
+        setDate(date);
+        complete = comp;
     }
 
     public String getName() {
@@ -47,4 +56,12 @@ public class Task {
     }
 
     public void setDate(String date) { this.date = date; }
+
+    public void markComplete(){
+        complete = 1;
+    }
+
+    public int isComplete(){
+        return complete;
+    }
 }

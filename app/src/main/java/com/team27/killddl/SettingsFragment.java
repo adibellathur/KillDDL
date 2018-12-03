@@ -116,11 +116,6 @@ public class  SettingsFragment extends Fragment {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 showPopup();
-                //helper.deleteAllTasks();
-                showToast("Deleted all tasks.");
-                //Intent i = new Intent(view.getContext(),LoginActivity.class);
-                //AccessToken.setCurrentAccessToken(null);
-                //startActivity(i);
             }
         });
 

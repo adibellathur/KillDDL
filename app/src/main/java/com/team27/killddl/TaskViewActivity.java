@@ -35,7 +35,9 @@ public class TaskViewActivity extends AppCompatActivity {
     private TextView taskDescription;
     private TextView taskDate;
     private TextView taskPriority;
+    private TextView taskStatus;
     private Button deleteButton;
+    private Button completeButton;
     public String tname;
 
     SharedPreferences prefs;
@@ -62,11 +64,14 @@ public class TaskViewActivity extends AppCompatActivity {
         taskDate = (TextView) findViewById(R.id.textView_taskDate);
         taskDescription = (TextView) findViewById(R.id.textView_taskDescription);
         deleteButton = (Button) findViewById(R.id.button_delete);
+        completeButton = (Button) findViewById(R.id.complete_button);
+        taskStatus = (TextView)findViewById(R.id.status);
 
         String name= getIntent().getStringExtra("NAME"); //from DayCalandarFragment intent
         showToast(name);
         Task t = helper.getTask(name);
         String date = t.getDate();
+        int complete = t.isComplete();
         showToast(date);
         tname = t.getName();
         String description = t.getDescription();
@@ -87,11 +92,14 @@ public class TaskViewActivity extends AppCompatActivity {
         else if(priority == 4){
             taskPriority.setTextColor(Color.RED);
         }
-
+        String comp = complete == 1 ? "Completed" : "Not Completed";
         taskName.setText(tname);
         taskPriority.setText("Priority: " + Integer.toString(priority));
         taskDate.setText("Due Date: " + date);
         taskDescription.setText("Description: \n" + description);
+        taskStatus.setText("Status: " + comp);
+
+
 
     }
     private void showToast(String content) {
@@ -119,6 +127,21 @@ public class TaskViewActivity extends AppCompatActivity {
         showToast(tname);
         startActivity(intent);
     }
+
+    public void completeTask(View view){
+        View parent = (View)view.getParent();
+        TextView taskTextView = (TextView) parent.findViewById(R.id.textView_taskName);
+        String task = String.valueOf(taskTextView.getText());
+        int s = helper.markComplete(task);
+        //showToast(Integer.toString(s));
+        showToast(Integer.toString(helper.getTask(task).isComplete()));
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        //TextView stat = (TextView) view.findViewById(R.id.status);
+        //stat.setText("Status: Completed");
+
+    }
+
 }
 
 
