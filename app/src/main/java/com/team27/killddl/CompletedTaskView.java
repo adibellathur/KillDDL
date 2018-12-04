@@ -1,6 +1,8 @@
 package com.team27.killddl;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,9 +24,21 @@ public class CompletedTaskView extends AppCompatActivity {
     private DBHelper helper;
     private ArrayAdapter<String> mAdapter;
 
+    String nCompleted;
+
+    SharedPreferences prefs;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Dark = "darkKey";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if (prefs.getBoolean(Dark, true)) {
+            setTheme(R.style.Dark);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completed_task_view);
 
@@ -34,6 +48,7 @@ public class CompletedTaskView extends AppCompatActivity {
         numCompleted = (TextView) findViewById(R.id.numComplete);
 
         ArrayList<Task> tasks = helper.getTaskList();
+        nCompleted = String.valueOf(tasks.size());
         if(tasks.size() == 0){
             numCompleted.setText("You haven't completed any tasks. Keep Working! \n");
         }
@@ -86,6 +101,16 @@ public class CompletedTaskView extends AppCompatActivity {
             mAdapter.notifyDataSetChanged();
         }
 
+    }
+
+    public void shareProgress(View view) {
+        String msg = "I have completed " + nCompleted + " tasks using KillDDL. Get the app here: https://play.google.com/store";
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 }
 
