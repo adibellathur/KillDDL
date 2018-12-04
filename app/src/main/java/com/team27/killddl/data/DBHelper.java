@@ -60,6 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void insertNewTask(String name, String description, int priority, String date){
+        System.out.println("hello");
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NAME,name);
@@ -69,6 +70,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(DUE_DATE, date);
         db.insertWithOnConflict(DB_TABLE,null,values,SQLiteDatabase.CONFLICT_REPLACE);
         db.close();
+
     }
 
     public void insertNewTask(Task t){
