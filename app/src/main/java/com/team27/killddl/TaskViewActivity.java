@@ -39,6 +39,8 @@ public class TaskViewActivity extends AppCompatActivity {
     private Button deleteButton;
     private Button completeButton;
     public String tname;
+    public String tdate;
+    public String tdesc;
 
     SharedPreferences prefs;
     public static final String MyPREFERENCES = "MyPrefs";
@@ -73,6 +75,8 @@ public class TaskViewActivity extends AppCompatActivity {
         String date = t.getDate();
         int complete = t.isComplete();
         showToast(date);
+        tdate = t.getDate();
+        tdesc = t.getDescription();
         tname = t.getName();
         String description = t.getDescription();
         showToast(description);
@@ -117,6 +121,18 @@ public class TaskViewActivity extends AppCompatActivity {
         helper.deleteTask(task);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void shareTask(View view) {
+        String msg = tname + " is due on " + tdate + ".";
+        msg += "\n\n";
+        msg += '"' + tdesc + '"';
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
     }
 
     public void editTask(View view){
