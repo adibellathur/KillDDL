@@ -58,6 +58,7 @@ public class  SettingsFragment extends Fragment {
     private int numComplete;
     private int getNumCompleteToday;
     private Button completedStats;
+    private TextView name;
     DBHelper helper;
     PopupWindow popUp;
     LinearLayout layout;
@@ -139,7 +140,11 @@ public class  SettingsFragment extends Fragment {
                 startActivity(i);
             }
         });
-        /**/
+        //Intent inte = getIntent();
+        name = (TextView) view.findViewById(R.id.name);
+        String nm = getArguments().getString("username");
+        if(nm == null) nm = "Guest";
+        name.setText("Welcome, " + nm +  "!");
 
 
 

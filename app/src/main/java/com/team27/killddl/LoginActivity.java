@@ -116,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                 //showToast(result);
                 if(result.equals("valid")) {
                     Intent next = new Intent(getApplicationContext(), MainActivity.class);
+                    next.putExtra("username", us);
                     startActivity(next);
                 }
                 else if(result.equals("invalid")){

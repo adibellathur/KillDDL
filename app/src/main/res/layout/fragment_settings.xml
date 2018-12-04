@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".SettingsFragment">
 
+
     <Switch
         android:id="@+id/toggleTheme"
         android:layout_width="211dp"
         android:layout_height="26dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="8dp"
         android:showText="false"
         android:text="Dark Theme"
@@ -46,13 +47,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
-        android:background="?attr/colorButtonNormal"
         android:text="Login/Logout"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/completedStats" />
-        app
+        app:layout_constraintTop_toBottomOf="@+id/completedStats"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
 
     <Button
         android:id="@+id/reset"
@@ -68,7 +70,9 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginLogout"
-        app:layout_constraintVertical_bias="0.028" />
+        app:layout_constraintVertical_bias="0.028"
+        android:textColor="#FFFFFF"
+        style="@style/Widget.AppCompat.Button.Colored"/>
 
     <Button
         android:id="@+id/completedStats"
@@ -80,7 +84,22 @@
         android:text="Completion Statistics"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleNotifs" />
+        app:layout_constraintTop_toBottomOf="@+id/toggleNotifs"
+        android:textColor="#FFFFFF"
+        style="@style/Widget.AppCompat.Button.Colored"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/toggleTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

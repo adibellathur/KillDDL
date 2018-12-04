@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         importantFragment = new ImportantFragment();
         settingsFragment = new SettingsFragment();
 
+
         toolbar = getSupportActionBar();
         toolbar.setElevation(0);
         toolbar.setTitle("Calendar");
@@ -74,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_settings:
                         toolbar.setTitle("Settings");
+                        Bundle data = new Bundle();
+                        Intent inte = getIntent();
+
+                        data.putString("username", inte.getStringExtra("username"));
+                        settingsFragment.setArguments(data);
                         loadFragment(settingsFragment);
 //                        showToast("Settings pressed");
                         break;
@@ -89,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
 //        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 //
