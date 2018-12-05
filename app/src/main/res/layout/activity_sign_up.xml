@@ -69,6 +69,8 @@
             android:id="@+id/SignUpBtn"
             android:layout_width="251dp"
             android:layout_height="38dp"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:text="SignUp" />
     </LinearLayout>
 

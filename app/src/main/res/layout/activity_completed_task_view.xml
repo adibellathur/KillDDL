@@ -56,6 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="shareProgress"
+                android:textColor="#FFFFFF"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:text="Share Your Progress" />
 
             <ListView

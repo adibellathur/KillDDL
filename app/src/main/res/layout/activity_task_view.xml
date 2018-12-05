@@ -82,23 +82,23 @@
             android:layout_height="44dp"
             android:layout_marginTop="44dp"
             android:layout_marginEnd="40dp"
-            android:background="?attr/colorPrimaryDark"
+            android:background="@color/red"
+            android:textColor="#FFFFFF"
             android:onClick="deleteTask"
             android:text="Delete"
-            android:textColor="?android:attr/textColorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_taskDescription" />
 
         <Button
             android:id="@+id/edit_button"
-            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
             android:layout_marginTop="44dp"
             android:onClick="editTask"
             android:text="Edit"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.AppCompat.Button.Colored"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_taskDescription" />
 
@@ -110,6 +110,8 @@
             android:layout_marginTop="44dp"
             android:layout_marginEnd="8dp"
             android:onClick="completeTask"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:text="Complete"
             app:layout_constraintEnd_toStartOf="@+id/button_delete"
             app:layout_constraintHorizontal_bias="1.0"
@@ -124,6 +126,8 @@
             android:layout_marginTop="8dp"
             android:onClick="shareTask"
             android:text="Share"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.AppCompat.Button.Colored"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_button" />
 
